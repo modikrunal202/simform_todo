@@ -1,5 +1,5 @@
 import { User } from "../../entities/User";
-import { UserInterface } from "../../Interfaces/userInterface";
+import { UserInterface } from "../../Interfaces/user.interface";
 import { getConnection } from "typeorm";
 
 export class AuthUtils {
@@ -37,5 +37,8 @@ export class AuthUtils {
     } catch (error) {
       throw new Error(error);
     }
+  };
+  public getUserDetailsById = async (userId: number) => {
+    return User.findOne({ id: userId });
   };
 }

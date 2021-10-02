@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
+import { Categories } from "./Category";
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -37,4 +38,7 @@ export class User extends BaseEntity {
 
    @UpdateDateColumn()
    updated_at: Date;
+
+   @OneToMany(() => Categories, (category: Categories) => category.user_id, {onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+   categories: Array<Categories>
 }

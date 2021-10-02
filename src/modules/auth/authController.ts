@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Jwt } from "../../config/jwt";
 const bcrypt = require("bcryptjs");
-import { UserInterface } from "src/Interfaces/userInterface";
+import { UserInterface } from "src/Interfaces/user.interface";
 import { AuthUtils } from "./authUtils";
 import { StatusCodes } from "http-status-codes";
 
@@ -18,9 +18,9 @@ export class AuthController {
         password: encryptedPassword,
       };
       const result = await this.authUtils.createUser(userData);
-      return res.status(200).json({ message: "User Created", data: result });
+      return res.status(StatusCodes.OK).json({ message: "User Created", data: result });
     } catch (error) {
-      return res.status(503).json({ error: "Something went wrong." });
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Something went wrong." });
     }
   };
 
@@ -39,7 +39,7 @@ export class AuthController {
       });
     } catch (error) {
       console.error("error",error)
-      return res.status(503).json({ error: "Something went wrong." });
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Something went wrong." });
     }
   };
   public googleSignIn = (req: Request, res: Response) => {

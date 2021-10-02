@@ -15,14 +15,21 @@ export async function jwtInitializePassport(passport: any) {
   passport.use(
     new JwtStrategy(
       {
-        secretOrKey: "secret",
+        secretOrKey: process.env.JWT_SECRET_KEY,
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       },
-      (jwt_payload: any, next: any) => {
+      async (jwt_payload: any, next: any) => {
         if (jwt_payload && jwt_payload.id) {
-          next(null, true);
+          const userInfo: any = await authUtils.getUserDetailsById(
+            jwt_payload.id
+          );
+          if (userInfo) {
+            return next(null, userInfo);
+          } else {
+            return next(null, false, "Authentication Failed");
+          }
         } else {
-          next(null, false);
+          next(null, false, "No Auth Token Provided");
         }
       }
     )
@@ -57,15 +64,12 @@ export async function initializePassport(passport: any) {
 }
 
 export async function googlePassportInitialize(passport: any) {
-  console.log("google passport...");
-
   passport.use(
     new GoogleStrategy(
       {
-        clientID:
-          "191620509869-tksme5u9dekva7gaqu3er3l0frg7k1a0.apps.googleusercontent.com",
-        clientSecret: "ahPp6q4JDzp_e3lBt46ccZSe",
-        callbackURL: "http://localhost:8080/api/auth/google/callback",
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_SECRET,
+        callbackURL: process.env.GOOGLE_CALLBACK,
         passReqToCallback: true,
       },
       async function (
@@ -81,10 +85,11 @@ export async function googlePassportInitialize(passport: any) {
             first_name: profile.given_name,
             last_name: profile.family_name,
           };
-          console.log("profile-----", userInfo);
-          const userDetails: any = await authUtils.checkUserExists(profile.email);
+          const userDetails: any = await authUtils.checkUserExists(
+            profile.email
+          );
           if (!userDetails) {
-            const addUser = await authUtils.createUser(userInfo)
+            const addUser = await authUtils.createUser(userInfo);
             return cb(false, addUser);
           }
           return cb(false, userDetails);
