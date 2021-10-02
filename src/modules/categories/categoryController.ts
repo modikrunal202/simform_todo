@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { CategoryInterface } from "src/Interfaces/category.interface";
+import { CategoryInterface } from "src/interfaces/category.interface";
 import { CategoryUtils } from "./categoryUtils";
 
 export class CategoryController {

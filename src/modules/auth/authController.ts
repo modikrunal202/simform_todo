@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Jwt } from "../../config/jwt";
 const bcrypt = require("bcryptjs");
-import { UserInterface } from "src/Interfaces/user.interface";
+import { UserInterface } from "src/interfaces/user.interface";
 import { AuthUtils } from "./authUtils";
 import { StatusCodes } from "http-status-codes";
 

@@ -1,5 +1,5 @@
 import { User } from "../../entities/User.entity";
-import { UserInterface } from "../../Interfaces/user.interface";
+import { UserInterface } from "../../interfaces/user.interface";
 import { getConnection } from "typeorm";
 
 export class AuthUtils {

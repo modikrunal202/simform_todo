@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { TaskInterface } from "../../Interfaces/task.interface";
+import { TaskInterface } from "../../interfaces/task.interface";
 import { TaskUtils } from "./taskUtils";
 
 export class TaskController {

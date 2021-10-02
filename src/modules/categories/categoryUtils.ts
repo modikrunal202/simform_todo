@@ -1,6 +1,6 @@
 import { Utils } from "../../helpers/utils";
 import { Categories } from "../../entities/Category.entity";
-import { CategoryInterface } from "src/Interfaces/category.interface";
+import { CategoryInterface } from "src/interfaces/category.interface";
 
 export class CategoryUtils {
   public addCategory = async (categoryData: any) => {

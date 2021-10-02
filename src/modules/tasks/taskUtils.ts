@@ -1,6 +1,6 @@
 import { Utils } from "../../helpers/utils";
 import { Tasks } from "../../entities/Tasks.entity";
-import { TaskInterface } from "../../Interfaces/task.interface";
+import { TaskInterface } from "../../interfaces/task.interface";
 
 export class TaskUtils {
   public checkTaskExists = async (
