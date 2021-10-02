@@ -1,5 +1,5 @@
 import { Utils } from "../../helpers/utils";
-import { Categories } from "../../entities/Category";
+import { Categories } from "../../entities/Category.entity";
 import { CategoryInterface } from "src/Interfaces/category.interface";
 
 export class CategoryUtils {
@@ -42,14 +42,19 @@ export class CategoryUtils {
       is_deleted: 0,
     };
     if (searchString) {
-      const likePatten = Utils.removeApostropheFromLikeQuery(searchString);
-      whereQuery += " AND category_name like :category_name";
+      whereQuery += " AND c.category_name ILIKE :category_name";
       whereQueryObj["category_name"] = `%${searchString}%`;
     }
-    let categories = await Categories.createQueryBuilder("")
+    let categories = await Categories.createQueryBuilder("c")
+      .select(["c.*"])
       .where(whereQuery, whereQueryObj)
-      .paginate();
-    return categories;
+      .offset(skip)
+      .limit(limit)
+      .getRawMany();
+    let categorieCount = await Categories.createQueryBuilder("c")
+      .where(whereQuery, whereQueryObj)
+      .getCount();
+    return { categories, categorieCount };
   };
 
   public getCategoryById = async (categoryId: number) => {

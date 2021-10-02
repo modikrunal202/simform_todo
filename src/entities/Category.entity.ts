@@ -1,5 +1,16 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { User } from "./User";
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
+import { Tasks } from "./Tasks.entity";
+import { User } from "./User.entity";
 
 @Entity("categories")
 export class Categories extends BaseEntity {
@@ -12,7 +23,7 @@ export class Categories extends BaseEntity {
   category_name: string;
 
   @ManyToOne(() => User, (user: User) => user.categories)
-  @JoinColumn({name: 'user_id'})
+  @JoinColumn({ name: "user_id" })
   user_id: User;
 
   @Column({
@@ -32,4 +43,10 @@ export class Categories extends BaseEntity {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => Tasks, (task: Tasks) => task.category_id, {
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+  })
+  tasks: Array<Tasks>;
 }

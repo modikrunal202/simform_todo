@@ -1,4 +1,4 @@
-import { User } from "../../entities/User";
+import { User } from "../../entities/User.entity";
 import { UserInterface } from "../../Interfaces/user.interface";
 import { getConnection } from "typeorm";
 

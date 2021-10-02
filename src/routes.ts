@@ -2,6 +2,7 @@ import express from "express";
 import { Middleware } from "./middleware";
 import { AuthRoute } from "./modules/auth/authRoute";
 import { CategoryRoute } from "./modules/categories/categoryRoute";
+import { TaskRoute } from "./modules/tasks/taskRoute";
 
 export class Routes {
   public path(passport: any) {
@@ -11,9 +12,9 @@ export class Routes {
     router.use(
       "/categories",
       middleware.authenticateUserMiddleware(passport),
-      // passport.authenticate("jwt", { session: false }),
       CategoryRoute
     );
+    router.use("/tasks", middleware.authenticateUserMiddleware(passport), TaskRoute)
     router.all("/*", (req, res) => {
       return res.status(404).json({
         error: "URL Not Found",

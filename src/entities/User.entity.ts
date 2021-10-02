@@ -1,5 +1,6 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
-import { Categories } from "./Category";
+import { Categories } from "./Category.entity";
+import { Tasks } from "./Tasks.entity";
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -41,4 +42,7 @@ export class User extends BaseEntity {
 
    @OneToMany(() => Categories, (category: Categories) => category.user_id, {onDelete: 'CASCADE', onUpdate: 'CASCADE'})
    categories: Array<Categories>
+
+   @OneToMany(() => Tasks, (tasks: Tasks) => tasks.user_id, {onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+   tasks: Array<Tasks>
 }

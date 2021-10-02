@@ -11,7 +11,6 @@ export class CategoryController {
         category_name: req.body.category_name,
         user_id: res.locals._userInfo.id,
       };
-      console.log("body----", categoryData);
       await this.categoryUtils.addCategory(categoryData);
       return res.status(StatusCodes.OK).json({ message: "Category Created" });
     } catch (error) {
@@ -24,7 +23,7 @@ export class CategoryController {
     try {
       const getCategories = await this.categoryUtils.getCategories(req.query);
       //   console.log('getCategories',getCategories)
-      return res.status(StatusCodes.OK).json({ data: getCategories });
+      return res.status(StatusCodes.OK).json({ data: getCategories.categories, totalCount: getCategories.categorieCount });
     } catch (error) {
       console.error("error", error);
       return res

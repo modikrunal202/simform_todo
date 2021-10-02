@@ -3,7 +3,7 @@ import * as passportJWT from "passport-jwt";
 import * as passportGoogle from "passport-google-oauth2";
 import { getConnection } from "typeorm";
 import { AuthUtils } from "../modules/auth/authUtils";
-import { User } from "src/entities/User";
+import { User } from "src/entities/User.entity";
 const bcrypt = require("bcryptjs");
 const LocalStrategy: any = passportLocal.Strategy;
 const JwtStrategy: any = passportJWT.Strategy;
