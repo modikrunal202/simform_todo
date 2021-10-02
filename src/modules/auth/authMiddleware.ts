@@ -40,4 +40,32 @@ export class AuthMiddleware {
       })(req, res, next);
     };
   };
+
+  public authenticateGoogleUsers = (passport: any) => {
+    return async (req: Request, res: Response, next: NextFunction) => {
+      console.log("reach222...");
+      passport.authenticate(
+        "google",
+        { scope: ["email", "profile"] },
+        function (err: any, user: any, info: any) {
+          if (err) {
+            return res
+              .status(StatusCodes.INTERNAL_SERVER_ERROR)
+              .json({ error: "Something went wrong" });
+          }
+          console.log("info=====", info);
+          console.log("user=====", user);
+          if (info && Object.keys(info).length) {
+            return res
+              .status(StatusCodes.BAD_REQUEST)
+              .json({ error: info.message });
+          }
+          if (user) {
+            res.locals._userInfo = user;
+            next();
+          }
+        }
+      )(req, res, next);
+    };
+  };
 }

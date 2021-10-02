@@ -5,7 +5,7 @@ import { createConnection } from 'typeorm';
 import passport from 'passport';
 import { User } from './entities/User';
 import { Routes } from './routes';
-import { initializePassport, jwtInitializePassport } from './config/passport';
+import { initializePassport, jwtInitializePassport, googlePassportInitialize } from './config/passport';
 const main = async () => {
 	try {
 		await createConnection({
@@ -22,6 +22,7 @@ const main = async () => {
 		// app.use(flash())
 		await initializePassport(passport)
 		await jwtInitializePassport(passport)
+		await googlePassportInitialize(passport)
         const routes = new Routes(passport);
 		app.use(express.json());
         app.use(passport.initialize())

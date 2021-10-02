@@ -12,5 +12,8 @@ export function AuthRoute(passport: any) {
     authMiddleware.authenticateUser(passport),
     authController.userLogin
   );
+  router.get('/google-signin', authController.googleSignIn)
+  router.get("/google", passport.authenticate("google", { scope: ["email", "profile"]}), authController.userLogin)
+  router.get("/google/callback", authMiddleware.authenticateGoogleUsers(passport), authController.userLogin)
   return router;
 }

@@ -42,4 +42,7 @@ export class AuthController {
       return res.status(503).json({ error: "Something went wrong." });
     }
   };
+  public googleSignIn = (req: Request, res: Response) => {
+    res.send(`<a href='/api/auth/google'>Authenticate with google</a>`)
+  }
 }
