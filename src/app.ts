@@ -1,10 +1,8 @@
 import express from "express";
 import cors from "cors";
 import * as dotenv from "dotenv";
-// import * as flash from 'express-flash';
 const app = express();
 import { createConnection } from "typeorm";
-import {pagination} from 'typeorm-pagination'
 import passport from "passport";
 import { User } from "./entities/User.entity";
 import { Routes } from "./routes";
@@ -37,7 +35,6 @@ const main = async () => {
     const routes = new Routes();
     app.use(express.json());
     app.use(passport.initialize());
-    app.use(pagination);
     app.use(cors())
     app.use("/api", routes.path(passport));
     app.listen(PORT, () => {
