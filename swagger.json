@@ -1,0 +1,363 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "defaultTitle",
+    "description": "defaultDescription",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "paths": {
+    "/api/categories/update-category": {
+      "post": {
+        "description": "Auto generated using Swagger Inspector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/categories_updatecategory_body"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\r\n    \"category_name\": \"New Category\",\r\n    \"category_id\": 7\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://localhost:8080"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "http://localhost:8080"
+        }
+      ]
+    },
+    "/api/categories/get-category/7": {
+      "get": {
+        "description": "Auto generated using Swagger Inspector",
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://localhost:8080"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "http://localhost:8080"
+        }
+      ]
+    },
+    "/api/categories/add-category": {
+      "post": {
+        "description": "Auto generated using Swagger Inspector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/categories_addcategory_body"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\r\n    \"category_name\": \"grocerry\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://localhost:8080"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "http://localhost:8080"
+        }
+      ]
+    },
+    "/api/auth/signup": {
+      "post": {
+        "description": "Auto generated using Swagger Inspector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/auth_signup_body"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\r\n    \"first_name\": \"krunal\",\r\n    \"last_name\": \"modi\",\r\n    \"email\": \"test2@test.com\",\r\n    \"password\": \"12356\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://localhost:8080"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "http://localhost:8080"
+        }
+      ]
+    },
+    "/api/categories/get-categories": {
+      "get": {
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "searchString",
+            "in": "query",
+            "required": false,
+            "allowEmptyValue": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://localhost:8080"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "http://localhost:8080"
+        }
+      ]
+    },
+    "/api/auth/signin": {
+      "post": {
+        "description": "Auto generated using Swagger Inspector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/auth_signin_body"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\r\n    \"email\": \"test1@test.com\",\r\n    \"password\": \"123\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://localhost:8080"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "http://localhost:8080"
+        }
+      ]
+    },
+    "/api/categories/delete-category": {
+      "delete": {
+        "description": "Auto generated using Swagger Inspector",
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://localhost:8080"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "http://localhost:8080"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "categories_addcategory_body": {
+        "type": "object",
+        "properties": {
+          "category_name": {
+            "type": "string"
+          }
+        }
+      },
+      "auth_signup_body": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "auth_signin_body": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "categories_updatecategory_body": {
+        "type": "object",
+        "properties": {
+          "category_name": {
+            "type": "string"
+          },
+          "category_id": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "in": "header"
+      }
+    },
+    "security": [{
+      "bearerAuth": []
+    }]
+  }
+}
