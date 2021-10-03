@@ -16,6 +16,7 @@ import {
 import { Categories } from "./entities/Category.entity";
 import { Tasks } from "./entities/Tasks.entity";
 dotenv.config()
+const PORT = process.env.PORT || 8080
 const main = async () => {
   try {
     await createConnection({
@@ -30,7 +31,6 @@ const main = async () => {
       logging: true,
     });
     console.log("Connected to Postgres");
-    // app.use(flash())
     await initializePassport(passport);
     await jwtInitializePassport(passport);
     await googlePassportInitialize(passport);
@@ -40,8 +40,8 @@ const main = async () => {
     app.use(pagination);
     app.use(cors())
     app.use("/api", routes.path(passport));
-    app.listen(8080, () => {
-      console.log("Now running on port 8080");
+    app.listen(PORT, () => {
+      console.log("Now running on port ", PORT);
     });
   } catch (error) {
     console.error(error);
