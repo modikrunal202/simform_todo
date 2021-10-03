@@ -16,13 +16,24 @@ router.post(
   categoryController.addCategory
 );
 
+router.get("/get-categories", categoryController.getCategories);
 router.get(
-    "/get-categories",
-    categoryController.getCategories
-)
-router.get('/get-category/:id', categoryController.getCategoryDetails)
-router.post('/update-category', categoryValidationRules(), middleware.validate,
-categoryMiddleware.checkCategoryExists, categoryController.updateCategory)
-router.delete('/delete-category', categoryController.deleteCategory)
+  "/get-category/:id",
+  categoryMiddleware.checkActionAllowed,
+  categoryController.getCategoryDetails
+);
+router.post(
+  "/update-category",
+  categoryValidationRules(),
+  middleware.validate,
+  categoryMiddleware.checkActionAllowed,
+  categoryMiddleware.checkCategoryExists,
+  categoryController.updateCategory
+);
+router.delete(
+  "/delete-category",
+  categoryMiddleware.checkActionAllowed,
+  categoryController.deleteCategory
+);
 
 export const CategoryRoute: Router = router;

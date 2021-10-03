@@ -14,4 +14,14 @@ export class CategoryMiddleware {
             next()
         }
     }
+    public checkActionAllowed = async(req: Request, res: Response, next: NextFunction) => {
+        const category_id = req.body && req.body.category_id ? req.body.category_id : +req.params.id
+        const user_id = res.locals._userInfo.id
+        const isCategoryExists = await this.categoryUtils.checkActionAllowed(category_id, user_id)
+        if (isCategoryExists) {
+            next()
+        } else {
+            return res.status(StatusCodes.NOT_FOUND).json({error: "Category not found."})
+        }
+    }
 }

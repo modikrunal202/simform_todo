@@ -36,11 +36,12 @@ export class CategoryUtils {
   public getCategories = async (details: any, userId: number) => {
     const { skip, limit } = Utils.getSkipLimit(details.page, details.limit);
     const { searchString, sortBy, sortOrder, filterBy } = details;
-    let whereQuery = "is_active = :is_active AND is_deleted = :is_deleted AND user_id = :user_id";
+    let whereQuery =
+      "is_active = :is_active AND is_deleted = :is_deleted AND user_id = :user_id";
     let whereQueryObj: any = {
       is_active: 1,
       is_deleted: 0,
-      user_id: userId
+      user_id: userId,
     };
     if (searchString) {
       whereQuery += " AND c.category_name ILIKE :category_name";
@@ -72,5 +73,13 @@ export class CategoryUtils {
       .returning("*") // returns all the column values
       .updateEntity(true)
       .execute();
+  };
+  public checkActionAllowed = async (category_id: number, user_id: number) => {
+    return await Categories.findOne({
+      where: {
+        user_id,
+        id: category_id,
+      },
+    });
   };
 }
