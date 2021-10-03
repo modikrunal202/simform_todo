@@ -17,13 +17,14 @@ router.post(
 );
 
 router.get("/get-tasks", taskController.getTasks);
-router.get("/get-task/:id", taskController.getTaskById);
+router.get("/get-task/:id", taskMiddleware.checkActionAllowed, taskController.getTaskById);
 router.post(
   "/update-task",
   taskValidationRules(),
   middleware.validate,
+  taskMiddleware.checkActionAllowed,
   taskMiddleware.checkTaskExists,
   taskController.updateTask
 );
-router.delete('/delete-task', taskController.deleteTask)
+router.delete('/delete-task', taskMiddleware.checkActionAllowed, taskController.deleteTask)
 export const TaskRoute: Router = router;

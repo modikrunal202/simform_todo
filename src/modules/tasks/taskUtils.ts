@@ -34,15 +34,17 @@ export class TaskUtils {
     await createTask.save();
     return createTask;
   };
-  public getTasks = async (details: any) => {
+  public getTasks = async (details: any, user_id: number) => {
     const { skip, limit } = Utils.getSkipLimit(details.page, details.limit);
     console.log("skip, ,limit", skip, limit);
 
     const { searchString } = details;
-    let whereQuery = "t.is_active = :is_active AND t.is_deleted = :is_deleted";
+    let whereQuery =
+      "t.is_active = :is_active AND t.is_deleted = :is_deleted AND t.user_id = :user_id";
     let whereQueryObj: any = {
       is_active: true,
       is_deleted: false,
+      user_id,
     };
     if (searchString) {
       whereQuery += " AND t.task ILIKE :task";
@@ -76,15 +78,20 @@ export class TaskUtils {
     return taskDetails;
   };
 
-  public updateTask = async (
-    taskData: TaskInterface,
-    task_id: number
-  ) => {
+  public updateTask = async (taskData: TaskInterface, task_id: number) => {
     return await Tasks.createQueryBuilder("")
       .update<TaskInterface>(Tasks, { ...taskData })
       .where("id = :id", { id: task_id })
       .returning("*") // returns all the column values
       .updateEntity(true)
       .execute();
+  };
+  public checkActionAllowed = async (task_id: number, user_id: number) => {
+    return await Tasks.findOne({
+      where: {
+        user_id,
+        id: task_id,
+      },
+    });
   };
 }
