@@ -1,12 +1,15 @@
 import { Router } from "express";
+import { Middleware } from "../../middleware";
 
 import { AuthController } from "./authController";
 import { AuthMiddleware } from "./authMiddleware";
+import { authValidationRules } from "./authValidator";
 const router: Router = Router();
 const authController: AuthController = new AuthController();
 const authMiddleware: AuthMiddleware = new AuthMiddleware();
+const middleware: Middleware = new Middleware();
 export function AuthRoute(passport: any) {
-  router.post("/signup", authController.userSignup);
+  router.post("/signup", authValidationRules(), middleware.validate, authMiddleware.checkEmailExists, authController.userSignup);
   router.post(
     "/signin",
     authMiddleware.authenticateUser(passport),

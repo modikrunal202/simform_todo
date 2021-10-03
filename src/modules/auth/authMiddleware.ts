@@ -20,6 +20,20 @@ export class AuthMiddleware {
     }
   };
 
+  public checkEmailExists = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { email } = req.body;
+    const userData = await this.authUtils.checkUserExists(email);
+    if (userData) {
+      return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({ error: "Email already exists." });
+    } else {
+      next();
+    }
+  };
+
   public authenticateUser = (passport: any) => {
     return async (req: Request, res: Response, next: NextFunction) => {
       passport.authenticate("local", function (err: any, user: any, info: any) {
@@ -43,7 +57,6 @@ export class AuthMiddleware {
 
   public authenticateGoogleUsers = (passport: any) => {
     return async (req: Request, res: Response, next: NextFunction) => {
-      console.log("reach222...");
       passport.authenticate(
         "google",
         { scope: ["email", "profile"] },
@@ -53,8 +66,6 @@ export class AuthMiddleware {
               .status(StatusCodes.INTERNAL_SERVER_ERROR)
               .json({ error: "Something went wrong" });
           }
-          console.log("info=====", info);
-          console.log("user=====", user);
           if (info && Object.keys(info).length) {
             return res
               .status(StatusCodes.BAD_REQUEST)
