@@ -23,7 +23,7 @@ export class TaskController {
 
   public getTasks = async (req: Request, res: Response) => {
     try {
-      const getTasks = await this.taskUtils.getTasks(req.query);
+      const getTasks = await this.taskUtils.getTasks(req.query, res.locals._userInfo.id);
       return res
         .status(StatusCodes.OK)
         .json({ data: getTasks.tasks, totalCount: getTasks.taskCount });
