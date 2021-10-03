@@ -33,13 +33,14 @@ export class CategoryUtils {
         .getOne();
     }
   };
-  public getCategories = async (details: any) => {
+  public getCategories = async (details: any, userId: number) => {
     const { skip, limit } = Utils.getSkipLimit(details.page, details.limit);
     const { searchString, sortBy, sortOrder, filterBy } = details;
-    let whereQuery = "is_active = :is_active AND is_deleted = :is_deleted";
+    let whereQuery = "is_active = :is_active AND is_deleted = :is_deleted AND user_id = :user_id";
     let whereQueryObj: any = {
       is_active: 1,
       is_deleted: 0,
+      user_id: userId
     };
     if (searchString) {
       whereQuery += " AND c.category_name ILIKE :category_name";

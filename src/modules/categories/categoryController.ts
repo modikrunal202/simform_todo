@@ -21,7 +21,7 @@ export class CategoryController {
   };
   public getCategories = async (req: Request, res: Response) => {
     try {
-      const getCategories = await this.categoryUtils.getCategories(req.query);
+      const getCategories = await this.categoryUtils.getCategories(req.query, res.locals._userInfo.id);
       //   console.log('getCategories',getCategories)
       return res.status(StatusCodes.OK).json({ data: getCategories.categories, totalCount: getCategories.categorieCount });
     } catch (error) {

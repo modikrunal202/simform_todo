@@ -17,7 +17,8 @@ export class AuthController {
         email,
         password: encryptedPassword,
       };
-      const result = await this.authUtils.createUser(userData);
+      const result: any = await this.authUtils.createUser(userData);
+      delete result.password;
       return res.status(StatusCodes.CREATED).json({ message: "User Created", data: result });
     } catch (error) {
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Something went wrong." });
