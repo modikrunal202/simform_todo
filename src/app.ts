@@ -44,6 +44,7 @@ const main = async () => {
       console.log("Now running on port 8080");
     });
   } catch (error) {
+    console.log("master commit...")
     console.error(error);
     throw new Error("Unable to connect to db");
   }
