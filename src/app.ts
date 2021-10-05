@@ -45,6 +45,7 @@ const main = async () => {
     console.log("Commit 1")
     console.log("Commit 2")
     console.log("Commit 3")
+    console.log("Commit 4")
     throw new Error("Unable to connect to db");
   }
 };
