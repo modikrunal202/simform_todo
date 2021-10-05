@@ -43,6 +43,7 @@ const main = async () => {
   } catch (error) {
     console.error(error);
     console.log("Commit 1")
+    console.log("Commit 2")
     throw new Error("Unable to connect to db");
   }
 };
