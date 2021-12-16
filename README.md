@@ -12,8 +12,8 @@ A ToDo application for adding user-wise categories and tasks. Users can signup w
 Clone the repo and install dependencies.
 
 ```
-git clone https://github.com/modikrunal202/simform_todo.git
-cd simform_todo
+git clone https://github.com/modikrunal202/todo_app.git
+cd todo_app
 ```
 ```
 npm install
